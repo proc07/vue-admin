@@ -1,6 +1,6 @@
 <template>
     <div class="">
-      Home
+      Home：{{route}}
     </div>
 </template>
 
@@ -8,7 +8,12 @@
 export default {
   name: 'Home',
   data () {
-    return {}
+    return {
+      route: this.$route.fullPath
+    }
+  },
+  created () {
+    console.log(this.$route)
   }
 }
 </script>
