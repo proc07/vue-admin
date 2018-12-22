@@ -1,12 +1,10 @@
 <template>
-    <div class="pageTabs-wrapper">
-      PageTabs
-    </div>
+    <div class="">401</div>
 </template>
 
 <script>
 export default {
-  name: 'PageTabs',
+  name: 'ErrorPage401',
   data () {
     return {}
   }
@@ -14,7 +12,5 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .pageTabs-wrapper{
-    background: #30B898;
-  }
+
 </style>

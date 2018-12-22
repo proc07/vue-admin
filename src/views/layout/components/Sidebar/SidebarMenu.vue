@@ -1,19 +1,20 @@
 <template>
-  <el-submenu :index="item.path" v-if="item.children && item.children.length">
+  <el-submenu :index="uniqueIndex(item.name)" v-if="item.children && item.children.length">
     <template slot="title">
-      <i class="el-icon-menu"></i>
-      <span slot="title">{{item.name}}</span>
+      <icon :iconOrUrl="item.meta.icon" />
+      <span>{{item.meta.title}}</span>
     </template>
-    <sidebar-menu v-for="(menu, index) in item.children" :key="index" :item="menu" />
+    <sidebar-menu v-for="(children, index) in item.children" :key="index" :item="children" />
   </el-submenu>
-  <el-menu-item :index="item.path" v-else>
-    <i class="el-icon-menu"></i>
-    <span slot="title">{{item.name}}</span>
+  <el-menu-item :index="uniqueIndex(item.name)" v-else>
+    <icon :iconOrUrl="item.meta.icon" />
+    <span slot="title">{{item.meta.title}}</span>
   </el-menu-item>
 </template>
 
 <script>
 import SidebarMenu from './SidebarMenu'
+import Icon from './Icon'
 
 export default {
   name: 'SidebarMenu',
@@ -23,12 +24,14 @@ export default {
   props: {
     item: Object
   },
+  methods: {
+    uniqueIndex (name) {
+      return name || String(Math.random())
+    }
+  },
   components: {
-    SidebarMenu
+    SidebarMenu,
+    Icon
   }
 }
 </script>
-
-<style rel="stylesheet/scss" lang="scss" scoped>
-
-</style>

@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -36,12 +38,20 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'SET_TOKEN'
+    ]),
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.loginForm)
           this.$request.login.Login(this.loginForm).then(res => {
-            console.log(res)
+            console.log('login:', res)
+            if (res.status === 200) {
+              // set vuex or cookie
+              this.SET_TOKEN(res.token)
+              // this.$router.push({ name: 'Home' }) 这样写会有警告！
+              this.$router.push({ path: '/home' })
+            }
           }).catch(err => {
             console.log(err)
           })

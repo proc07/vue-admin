@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Message, MessageBox } from 'element-ui'
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -21,7 +22,30 @@ instance.interceptors.request.use(function (config) {
 // Add a response interceptor
 instance.interceptors.response.use(function (response) {
   // Do something with response data
-  return response
+  const res = response.data
+  if (res.status !== 200) {
+    Message({
+      message: res.msg,
+      type: 'error',
+      duration: 4000
+    })
+    if (res.status === 501 || res.status === 502) {
+      const statusMap = {
+        501: '您已被登出，请重新登录',
+        502: 'token 已过期，请重新登录'
+      }
+      MessageBox.confirm(statusMap[res.status], '确定登出', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+
+      }).catch(() => {
+
+      })
+    }
+  }
+  return res
 }, function (error) {
   // Do something with response error
   return Promise.reject(error)

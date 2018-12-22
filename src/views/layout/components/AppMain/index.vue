@@ -1,7 +1,8 @@
 <template>
     <div class="app-main">
-      AppMain
-      <router-view />
+      <div class="main-wrapper">
+        <router-view />
+      </div>
     </div>
 </template>
 
@@ -16,5 +17,13 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   .app-main{
+    flex: 1;
+    padding: 16px;
+    box-sizing: border-box;
+    .main-wrapper{
+      height: 100%;
+      background: #ffffff;
+      border-radius: 6px;
+    }
   }
 </style>

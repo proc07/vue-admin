@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-      Navbar
+    <div class="navbar-wrapper">
+      <slot></slot>
     </div>
 </template>
 
@@ -14,5 +14,9 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-
+  .navbar-wrapper{
+    background: #ffffff;
+    display: flex;
+    height: 56px;
+  }
 </style>

@@ -1,96 +1,45 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import constantRouter from './constantRouter'
+import asyncRouter from './asyncRouter'
 
 Vue.use(Router)
-
-const asyncRouter = [
-  {
-    name: 'Menus-1',
-    path: '/menus-1',
-    icon: '',
-    component: () => import('@/views/layout'),
-    children: [
-      {
-        name: 'Menus-1-1',
-        path: '/menus-1-1',
-        icon: '',
-        component: () => import('@/views/home'),
-        children: [
-          {
-            name: '/menus-1-1-1',
-            path: '/menus-1-1-1',
-            icon: '',
-            component: () => import('@/views/home')
-          }
-        ]
-      },
-      {
-        name: 'Menus-1-2',
-        path: '/menus-1-2',
-        icon: '',
-        component: () => import('@/views/home'),
-        children: []
-      }
-    ]
-  },
-  {
-    name: 'Menus-2',
-    path: '/menus-2',
-    icon: '',
-    menuShow: true,
-    component: () => import('@/views/layout'),
-    children: [
-      {
-        name: 'Menus-2-1',
-        path: '/menus-2-1',
-        icon: '',
-        component: () => import('@/views/home'),
-        children: []
-      }
-    ]
-  },
-  {
-    name: 'Menus-3',
-    path: '/menus-3',
-    icon: '',
-    component: () => import('@/views/layout'),
-    children: [
-      {
-        name: 'Menus-3-1',
-        path: '/menus-3-1',
-        icon: '',
-        component: () => import('@/views/home'),
-        children: []
-      }
-    ]
-  }
-]
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  // 待优化，参数抽离出来
   routes: [
     {
       name: 'Login',
+      // path: '/login' 请勿修改，路由判断中使用到！
       path: '/login',
+      // 这里定义的路由必须设置该参数
+      meta: {
+        whiteList: true
+      },
       component: () => import('@/views/login')
     },
     {
-      path: '',
-      component: () => import('@/views/layout'),
-      redirect: 'home',
-      children: [
-        {
-          path: 'home',
-          component: () => import('@/views/home'),
-          name: 'Home',
-          meta: {}
-        }
-      ]
+      path: '/404',
+      meta: {
+        whiteList: true
+      },
+      component: () => import('@/views/errorPage/404')
+    },
+    {
+      path: '/401',
+      meta: {
+        whiteList: true
+      },
+      component: () => import('@/views/errorPage/401')
     }
   ]
 })
 
-router.addRoutes(asyncRouter)
-
 export default router
+
+export {
+  constantRouter,
+  asyncRouter
+}
