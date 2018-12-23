@@ -1,3 +1,4 @@
+// 为什么 el-submenu index 参数使用 route.name ？不用 path
 <template>
   <el-submenu :index="uniqueIndex(item.name)" v-if="item.children && item.children.length">
     <template slot="title">

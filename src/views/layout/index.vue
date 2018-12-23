@@ -8,11 +8,23 @@
     <div class="main-container">
       <div class="main-wrapper">
         <navbar>
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          </el-breadcrumb>
+          <div slot="left-side">
+            <breadcrumb />
+          </div>
+          <div slot="right-side">
+            <el-dropdown>
+              <div class="user-dropdown-link">
+                <img width="40" height="40" class="user-avatar" src="http://iph.href.lu/200x200?text=IG&fg=ffffff&bg=30b898" alt="用户头像">{{userInfo.name}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </div>
+              <el-dropdown-menu slot="dropdown">
+                <router-link to="/" tag="div">
+                  <el-dropdown-item>首页</el-dropdown-item>
+                </router-link>
+                <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </navbar>
         <page-tabs />
         <app-main />
@@ -22,27 +34,42 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import {
   AppMain,
   Navbar,
   PageTabs,
   Sidebar
 } from './components'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default {
   name: 'Layout',
   data () {
-    return {}
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'userInfo'
+    ])
+  },
+  created () {
+  },
+  methods: {
+    logout () {
+    }
   },
   components: {
     AppMain,
     Navbar,
     PageTabs,
-    Sidebar
+    Sidebar,
+    Breadcrumb
   }
 }
 </script>
-
+这里需要把组件样式和slot中样式分离开
 <style rel="stylesheet/scss" lang="scss" scoped>
   .app-container{
     width: 100%;
@@ -65,6 +92,14 @@ export default {
         display: flex;
         height: 100%;
         flex-direction: column;
+        .user-dropdown-link{
+          display: flex;
+          align-items: center;
+          .user-avatar{
+            border-radius: 50%;
+            margin-right: 10px;
+          }
+        }
       }
     }
   }

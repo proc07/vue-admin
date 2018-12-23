@@ -42,13 +42,12 @@ function generateRoutes (requestRouter, asyncRouter) {
   const resRouter = []
 
   for (let reqRoute of requestRouter) {
-    let mRouter = mergeRoutes(reqRoute, asyncRouter)
+    let mergeRouter = mergeRoutes(reqRoute, asyncRouter)
 
-    if (!mRouter) {
-      // 未完成
-      mRouter = createRouter(reqRoute)
+    if (!mergeRouter) {
+      mergeRouter = createRouter(reqRoute)
     }
-    resRouter.push(mRouter)
+    resRouter.push(mergeRouter)
   }
   return resRouter
 }
@@ -73,8 +72,8 @@ function createRouter (router) {
   return resRouter
 }
 
-function mergeRoutes (reqRouter, aRouters) {
-  for (let aRouter of aRouters) {
+function mergeRoutes (reqRouter, asyncRouter) {
+  for (let aRouter of asyncRouter) {
     // config extract key
     if (aRouter.path === reqRouter[MAP_PATH]) {
       aRouter.meta.icon = reqRouter[MAP_ICON]
@@ -85,6 +84,8 @@ function mergeRoutes (reqRouter, aRouters) {
           mergeRoutes(child, aRouter.children)
         })
       }
+      // filter unused router
+      console.log(reqRouter, aRouter)
       return aRouter
     }
   }

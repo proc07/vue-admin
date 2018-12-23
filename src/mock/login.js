@@ -3,43 +3,48 @@ const userList = {
     name: 'Super Admin',
     permission: [
       {
-        Title: '导航1',
+        Title: '菜单1',
         Path: '/menus-1',
         Icon: 'el-icon-menu',
         Children: [
           {
-            Title: '导航1 - 1',
+            Title: '菜单1-1',
             Path: '/menus-1-1',
             Icon: 'el-icon-menu',
             Children: [
               {
-                Title: '导航1 -1-1',
+                Title: '菜单-1-1',
                 Path: '/menus-1-1-1',
+                Icon: 'el-icon-menu'
+              },
+              {
+                Title: '菜单-1-3',
+                Path: '/menus-1-1-3',
                 Icon: 'el-icon-menu'
               }
             ]
           },
           {
-            Title: '导航1 -2',
+            Title: '菜单1-2',
             Path: '/menus-1-2',
             Icon: 'http://meiye-pre.lvshou.me/static/images/icon/icon_mendianshezhi.png'
           }
         ]
       },
       {
-        Title: '菜单二',
+        Title: '菜单2',
         Path: '/menus-2',
         Icon: 'el-icon-menu',
         Children: [
           {
-            Title: '菜单二-1',
+            Title: '菜单2-1',
             Path: '/menus-2-1',
             Icon: 'el-icon-menu'
           }
         ]
       },
       {
-        Title: 'Undefined Router',
+        Title: '未定义菜单',
         Path: '/menus-4',
         Icon: 'el-icon-menu',
         Children: [
