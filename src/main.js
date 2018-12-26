@@ -14,6 +14,7 @@ import store from './store'
 import requestList from './request'
 import './permission'
 import './icons'
+import './component'
 
 Vue.config.productionTip = false
 

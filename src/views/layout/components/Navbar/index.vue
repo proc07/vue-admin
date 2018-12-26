@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
       <div class="left-side">
         <div class="menu-fold" :class="isCollapse ? 'collapse' : ''" @click="changeCollapse">
-          <svg-icon name="svg-menu-fold"></svg-icon>
+          <base-svg-icon name="svg-menu-fold"></base-svg-icon>
         </div>
         <slot name="left-side"></slot>
       </div>

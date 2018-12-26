@@ -12,7 +12,7 @@
       <div class="main-wrapper">
         <navbar>
           <div slot="left-side">
-            <breadcrumb />
+            <comp-breadcrumb />
           </div>
           <div slot="right-side">
             <el-dropdown>
@@ -29,9 +29,7 @@
             </el-dropdown>
           </div>
         </navbar>
-        <!--
-          <page-tabs />
-        -->
+        <page-tabs style="display: none;" />
         <app-main />
       </div>
     </div>
@@ -46,7 +44,6 @@ import {
   PageTabs,
   Sidebar
 } from './components'
-import Breadcrumb from '@/base/Breadcrumb'
 
 export default {
   name: 'Layout',
@@ -73,8 +70,7 @@ export default {
     AppMain,
     Navbar,
     PageTabs,
-    Sidebar,
-    Breadcrumb
+    Sidebar
   }
 }
 </script>
