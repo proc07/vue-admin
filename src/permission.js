@@ -50,8 +50,7 @@ function hasRoute (routers, toName) {
 router.beforeEach((to, from, next) => {
   // console.log(to, from)
   if (getToken()) {
-    const { userInfo, routers } = store.getters
-    // console.log('userInfo', userInfo, routers)
+    const { routers } = store.getters
 
     if (to.path === '/login') {
       next('/')

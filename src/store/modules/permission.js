@@ -73,20 +73,29 @@ function createRouter (router) {
 }
 
 function mergeRoutes (reqRouter, asyncRouter) {
-  for (let aRouter of asyncRouter) {
+  let assignRouter = {}
+
+  for (let asRouter of asyncRouter) {
     // config extract key
-    if (aRouter.path === reqRouter[MAP_PATH]) {
-      aRouter.meta.icon = reqRouter[MAP_ICON]
-      aRouter.meta.title = reqRouter[MAP_TITLE]
-      aRouter.meta.roles.push(store.getters.userInfo._roleId)
+    if (asRouter.path === reqRouter[MAP_PATH]) {
+      asRouter.meta.icon = reqRouter[MAP_ICON]
+      asRouter.meta.title = reqRouter[MAP_TITLE]
+      asRouter.meta.roles.push(store.getters.userInfo._roleId)
+
+      assignRouter = Object.assign({}, asRouter, { children: [] })
+
       if (reqRouter[MAP_CHILDREN] && reqRouter[MAP_CHILDREN].length) {
         reqRouter[MAP_CHILDREN].forEach(child => {
-          mergeRoutes(child, aRouter.children)
+          const resRouter = mergeRoutes(child, asRouter.children)
+          if (resRouter) {
+            assignRouter.children.push(resRouter)
+          } else {
+            assignRouter.children.push(createRouter(child))
+          }
         })
       }
-      // filter unused router
-      console.log(reqRouter, aRouter)
-      return aRouter
+
+      return assignRouter
     }
   }
 }

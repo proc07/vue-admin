@@ -1,11 +1,14 @@
 <template>
   <div class="app-container">
-    <sidebar class="sidebar-container">
-      <div class="custom-content" style="height: 60px;line-height: 60px;text-align: center;background: #30B898;color: #fff; border-bottom: 1px solid #ccc">
-        CONFIG 管理系统
+    <sidebar class="sidebar-container" :class="collapseClass">
+      <div v-if="!isCollapse" class="custom-content">
+        Config Admin
+      </div>
+      <div v-else class="custom-content">
+        I G
       </div>
     </sidebar>
-    <div class="main-container">
+    <div class="main-container" :class="collapseClass">
       <div class="main-wrapper">
         <navbar>
           <div slot="left-side">
@@ -26,7 +29,9 @@
             </el-dropdown>
           </div>
         </navbar>
-        <page-tabs />
+        <!--
+          <page-tabs />
+        -->
         <app-main />
       </div>
     </div>
@@ -41,7 +46,7 @@ import {
   PageTabs,
   Sidebar
 } from './components'
-import Breadcrumb from '@/components/Breadcrumb'
+import Breadcrumb from '@/base/Breadcrumb'
 
 export default {
   name: 'Layout',
@@ -51,8 +56,12 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userInfo'
-    ])
+      'userInfo',
+      'isCollapse'
+    ]),
+    collapseClass () {
+      return this.isCollapse ? 'collapse' : ''
+    }
   },
   created () {
   },
@@ -83,11 +92,27 @@ export default {
       top: 0;
       bottom: 0;
       overflow: hidden;
+      transition: width .5s;
+      &.collapse{
+        width: 64px!important;
+      }
+      .custom-content{
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        background: #30B898;
+        color: #fff;
+        border-bottom: 1px solid #ccc;
+      }
     }
     .main-container{
       background: #f0f2f5;
       margin-left: 200px;
       height: 100%;
+      transition: margin-left .5s;
+      &.collapse{
+        margin-left: 64px!important;
+      }
       .main-wrapper{
         display: flex;
         height: 100%;

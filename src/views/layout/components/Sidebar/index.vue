@@ -25,13 +25,13 @@ export default {
   data () {
     return {
       ...this.$config.sidebarStyle,
-      defaultRoutePath: this.$route.name,
-      isCollapse: false
+      defaultRoutePath: this.$route.name
     }
   },
   computed: {
     ...mapGetters([
-      'routers'
+      'routers',
+      'isCollapse'
     ])
   },
   watch: {

@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     getBreadcrumb () {
-      console.log(this.$route.matched)
       this.breadcrumbList = this.$route.matched
     }
   }

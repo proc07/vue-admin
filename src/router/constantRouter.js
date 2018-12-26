@@ -23,7 +23,7 @@ export default [
         name: 'Index',
         meta: {
           title: 'index',
-          icon: '',
+          icon: ''
           // 设置 roles 属性，那么就会进行权限检测
           // roles: []
         }

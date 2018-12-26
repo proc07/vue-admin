@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     isIconOrImage () {
-      return this.iconOrUrl.indexOf('http') === -1 ? true : false
+      return this.iconOrUrl.indexOf('http') === -1
     }
   }
 }
