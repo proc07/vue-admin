@@ -40,6 +40,7 @@ export default {
   .navbar-wrapper{
     background: #ffffff;
     display: flex;
+    flex: 0 0 56px;
     height: 56px;
     justify-content: space-between;
     .left-side{

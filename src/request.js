@@ -5,7 +5,7 @@ const requireFiles = require.context('./api', false, /\.js$/)
 
 function addRequestToList (mName, reqList) {
   apiList[mName] = {}
-  reqList.forEach(item => {
+  reqList && reqList.forEach(item => {
     const headers = {}
     const { name, url, method } = item
     apiList[mName][name] = (params) => {

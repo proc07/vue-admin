@@ -12,7 +12,7 @@
       <div class="main-wrapper">
         <navbar>
           <div slot="left-side">
-            <comp-breadcrumb />
+            <base-breadcrumb />
           </div>
           <div slot="right-side">
             <el-dropdown>
