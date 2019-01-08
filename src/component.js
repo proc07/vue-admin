@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
-const componentsFiles = require.context('./components', true, /.*\/index\.vue$/)
-const baseFiles = require.context('./base', true, /.*\/index\.vue$/)
+const componentsFiles = require.context('./components', true, /.*\/index\.(vue|js)$/)
+const baseFiles = require.context('./base', true, /.*\/index\.(vue|js)$/)
 
 function capitalizeFirstLetter (string) {
   return string.charAt(0).toUpperCase() + string.slice(1)

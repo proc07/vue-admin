@@ -1,13 +1,12 @@
-// 为什么 el-submenu index 参数使用 route.name ？不用 path
 <template>
-  <el-submenu :index="uniqueIndex(item.name)" v-if="item.children && item.children.length">
+  <el-submenu :index="item.path" v-if="item.children && item.children.length">
     <template slot="title">
       <icon :iconOrUrl="item.meta.icon" />
       <span>{{item.meta.title}}</span>
     </template>
     <sidebar-menu v-for="(children, index) in item.children" :key="index" :item="children" />
   </el-submenu>
-  <el-menu-item :index="uniqueIndex(item.name)" v-else>
+  <el-menu-item :index="item.path" v-else>
     <icon :iconOrUrl="item.meta.icon" />
     <span slot="title">{{item.meta.title}}</span>
   </el-menu-item>

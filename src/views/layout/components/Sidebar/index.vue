@@ -25,7 +25,7 @@ export default {
   data () {
     return {
       ...this.$config.sidebarStyle,
-      defaultRoutePath: this.$route.name
+      defaultRoutePath: this.$route.path
     }
   },
   computed: {
@@ -36,7 +36,7 @@ export default {
   },
   watch: {
     $route (newRoute) {
-      this.defaultRoutePath = newRoute.name
+      this.defaultRoutePath = newRoute.path
     }
   },
   created () {

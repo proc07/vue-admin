@@ -1,30 +1,10 @@
 import router from './router'
 import store from './store'
 import config from './config'
+import { parsePath } from './utils/util'
 import { getToken } from './utils/token'
 
-/**
- * Parse simple path.
- */
-const bailRE = /[^\w.$]/
-function parsePath (path) {
-  if (bailRE.test(path)) {
-    return
-  }
-  const segments = path.split('.')
-  return function (obj) {
-    for (let i = 0; i < segments.length; i++) {
-      if (!obj) return
-      obj = obj[segments[i]]
-    }
-    return obj
-  }
-}
-
 function extractFirstOrLastPathKey (path) {
-  if (bailRE.test(path)) {
-    return
-  }
   const segments = path.split('.')
 
   return {
@@ -33,14 +13,14 @@ function extractFirstOrLastPathKey (path) {
   }
 }
 
-function hasRoute (routers, toName) {
+function hasRoute (routers, toPath) {
   return routers.some(route => {
-    if (route.name === toName) {
+    if (route.path === toPath && route.component) {
       return true
     }
 
     if (route.children && route.children.length) {
-      return hasRoute(route.children, toName)
+      return hasRoute(route.children, toPath)
     }
 
     return false
@@ -57,7 +37,7 @@ router.beforeEach((to, from, next) => {
     } else {
       if (routers.length) {
         // 检测 to route 是否允许进入（如果不需要进入到401页面，可删除下方判断，直接 next）
-        if ((to.meta && to.meta.whiteList) || hasRoute(routers, to.name)) {
+        if ((to.meta && to.meta.whiteList) || hasRoute(routers, to.path)) {
           next()
         } else {
           next('/401')

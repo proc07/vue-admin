@@ -6,6 +6,6 @@ Mock.mock(/\/login\/login/, 'post', loginAPI.login)
 Mock.mock(/\/login\/logout/, 'post', loginAPI.logout)
 Mock.mock(/\/login\/getUserInfo/, 'post', loginAPI.getUserInfo)
 
-Mock.mock(/\/feature\/getRegionList/, 'post', featureAPI.getRegionList)
+Mock.mock(/\/feature\/SubmitFilter/, 'post', featureAPI.SubmitFilter)
 
 export default Mock

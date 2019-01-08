@@ -3,7 +3,7 @@ const userList = {
     name: 'Super Admin',
     permission: [
       {
-        Title: '菜单1',
+        Title: '配置菜单',
         Path: '/menus-1',
         Icon: 'el-icon-menu',
         Children: [
@@ -32,13 +32,23 @@ const userList = {
         ]
       },
       {
-        Title: '菜单2',
-        Path: '/menus-2',
+        Title: '组件',
+        Path: '/base',
         Icon: 'el-icon-menu',
         Children: [
           {
-            Title: '菜单2-1',
-            Path: '/menus-2-1',
+            Title: 'Filters',
+            Path: '/base/filters',
+            Icon: 'el-icon-menu'
+          },
+          {
+            Title: 'Table',
+            Path: '/base/table',
+            Icon: 'el-icon-menu'
+          },
+          {
+            Title: 'Form',
+            Path: '/base/form',
             Icon: 'el-icon-menu'
           }
         ]
@@ -48,11 +58,11 @@ const userList = {
         Path: '/menus-4',
         Icon: 'el-icon-menu',
         Children: [
-          // {
-          //   Title: 'Undefined',
-          //   Path: '/menus-4-1',
-          //   Icon: 'el-icon-menu'
-          // }
+          {
+            Title: 'Undefined',
+            Path: '/menus-4-1',
+            Icon: 'el-icon-menu'
+          }
         ]
       }
     ]

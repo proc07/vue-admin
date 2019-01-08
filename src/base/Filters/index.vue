@@ -62,7 +62,7 @@
 import { deepClone } from '@/utils/util'
 
 export default {
-  name: 'Filters',
+  name: 'BaseFilters',
   data () {
     return {
       slotWhiteList: [

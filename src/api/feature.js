@@ -1,7 +1,7 @@
 export default [
   {
-    name: 'GetRegionList',
-    url: '/feature/getRegionList',
+    name: 'SubmitFilter',
+    url: '/feature/SubmitFilter',
     method: 'post'
   }
 ]

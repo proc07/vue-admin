@@ -36,14 +36,24 @@ export default [
     ]
   },
   {
-    name: 'Menus-2',
-    path: '/menus-2',
+    name: 'Components',
+    path: '/base',
     component: () => import('@/views/layout'),
     children: [
       {
-        name: 'Menus-2-1',
-        path: '/menus-2-1',
-        component: () => import('@/views/home')
+        name: 'Filters',
+        path: '/base/filters',
+        component: () => import('@/views/home/filters')
+      },
+      {
+        name: 'Table',
+        path: '/base/table',
+        component: () => import('@/views/home/table')
+      },
+      {
+        name: 'Form',
+        path: '/base/form',
+        component: () => import('@/views/home/form')
       }
     ]
   },
