@@ -108,7 +108,7 @@ export default {
           value: false,
           prepend: 'el-checkbox',
           style: {
-            height: '36px'
+            height: '40px'
           }
         },
         elSelect: {

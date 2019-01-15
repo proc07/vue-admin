@@ -23,7 +23,7 @@
 
       <el-table-column
         fixed="right"
-        label="操作"
+        label="操作 - slot"
         width="250">
         <template slot-scope="row">
           <el-button
@@ -35,18 +35,26 @@
       </el-table-column>
     </base-table>
 
-    <h3>Table - slot-render</h3>
+    <h3>Table - slot-render and header</h3>
     <code>
       <pre>render 参数调用：</pre>
       <pre>render() {} 不能使用这种</pre>
       <pre>render:()=>{} 应该使用该种</pre>
       <pre>有什么不一样的吗？</pre>
     </code>
+    <input type="text" placeholder="邮编 - render" v-model="zipInput" />
     <base-table
       :columns="columnSlotRender"
       :data="tableData"
-    >
-    </base-table>
+    />
+
+    <h3>Table - Pagination</h3>
+    <base-table
+      :columns="columnsPage"
+      :requestDataFn="tableRequestFn"
+      :pagination="pagination"
+      size="mini"
+    />
   </div>
 </template>
 
@@ -140,15 +148,24 @@ export default {
           label: '日期 - slot-scope'
         }
       ],
+      zipInput: '邮编 - render',
       columnSlotRender: [
         {
           prop: 'name',
-          label: '姓名 - render',
+          label: '姓名 - render and header',
           // render() {} 不能使用这种方式，它和下面 render: ()=>{} 有什么不一样的吗
           render: ({ row }) => {
             // console.log('scope render', row)
             return (
               <div>{ `${row.city}-${row.name}` }</div>
+            )
+          },
+          header: (column) => {
+            // console.log('scope header', column)
+            return (
+              <el-input
+                size="mini"
+                placeholder="输入关键字搜索 slot-header"/>
             )
           }
         },
@@ -162,20 +179,69 @@ export default {
         },
         {
           prop: 'zip',
-          label: '邮编 - render'
+          label: '邮编 - render',
+          render: (row) => {
+            return (
+              <div>{ this.zipInput }</div>
+            )
+          }
         }
-      ]
+      ],
+      columnsPage: [
+        {
+          prop: 'name',
+          label: '姓名'
+        },
+        {
+          prop: 'address',
+          label: '地区'
+        },
+        {
+          prop: 'date',
+          label: '日期'
+        },
+        {
+          prop: 'zip',
+          label: '邮编'
+        }
+      ],
+      pagination: {
+        small: true,
+        total: 10
+      }
     }
   },
   methods: {
+    tableRequestFn: function ({ currentPage, pageSize }) {
+      const data = []
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          for (let i = 0; i < pageSize; i++) {
+            const index = i + pageSize * (currentPage - 1)
+            data.push({
+              date: `${index}-date`,
+              name: `${index}-name`,
+              province: `${index}-province`,
+              city: `${index}-city`,
+              address: `${index}-address`,
+              zip: `${index}-zip`
+            })
+          }
+          resolve({
+            data,
+            total: 100
+          })
+        }, 1000)
+      })
+    }
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-.components-table{
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
+  .components-table{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
 </style>
