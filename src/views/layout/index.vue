@@ -29,6 +29,7 @@
             </el-dropdown>
           </div>
         </navbar>
+        <!-- 目前未实现 -->
         <page-tabs style="display: none;" />
         <app-main />
       </div>
@@ -74,7 +75,7 @@ export default {
   }
 }
 </script>
-这里需要把组件样式和slot中样式分离开
+
 <style rel="stylesheet/scss" lang="scss" scoped>
   .app-container{
     width: 100%;

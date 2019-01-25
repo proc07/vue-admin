@@ -1,14 +1,13 @@
-import { constantRouter, asyncRouter } from '@/router'
+import router, { constantRouter, asyncRouter } from '@/router'
 import { isExistArray } from '@/utils/util'
-import config from '@/config'
-import store from '@/store'
 
+const routerOptions = router.options
 const CONSTANT_MODE = 'constant'
 const ASYNC_MODE = 'async'
-const MAP_PATH = config.mapRequestKey.path || ''
-const MAP_ICON = config.mapRequestKey.icon || ''
-const MAP_TITLE = config.mapRequestKey.title || ''
-const MAP_CHILDREN = config.mapRequestKey.children || ''
+const MAP_PATH = routerOptions.mapRequestKey.path || ''
+const MAP_ICON = routerOptions.mapRequestKey.icon || ''
+const MAP_TITLE = routerOptions.mapRequestKey.title || ''
+const MAP_CHILDREN = routerOptions.mapRequestKey.children || ''
 
 // 过滤掉非当前用户访问的路由
 function filterConstantRouter (cRouter, roleId) {
@@ -58,7 +57,7 @@ function createRouter (router) {
     meta: {
       title: router[MAP_TITLE],
       icon: router[MAP_ICON],
-      roles: [store.getters.userInfo._roleId]
+      // roles: [store.getters.userInfo._roleId]
     },
     children: []
   }
@@ -80,7 +79,7 @@ function mergeRoutes (reqRouter, asyncRouter) {
     if (asRouter.path === reqRouter[MAP_PATH]) {
       asRouter.meta.icon = reqRouter[MAP_ICON]
       asRouter.meta.title = reqRouter[MAP_TITLE]
-      asRouter.meta.roles.push(store.getters.userInfo._roleId)
+      // asRouter.meta.roles.push(store.getters.userInfo._roleId)
 
       assignRouter = Object.assign({}, asRouter, { children: [] })
 
@@ -135,13 +134,13 @@ const permission = {
       return new Promise(resolve => {
         let resRouter = []
 
-        if (config.routerMode === ASYNC_MODE) {
+        if (routerOptions.routerMode === ASYNC_MODE) {
           // normal router.meta
           normalAsyncRouterMeta(asyncRouter)
           // merge request or async router
           const filterRouter = generateRoutes(routerOrRole, asyncRouter)
           resRouter = resRouter.concat(constantRouter, filterRouter)
-        } else if (config.routerMode === CONSTANT_MODE) {
+        } else if (routerOptions.routerMode === CONSTANT_MODE) {
           resRouter = filterConstantRouter(constantRouter, routerOrRole)
         }
         // merge

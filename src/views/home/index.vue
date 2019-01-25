@@ -1,6 +1,6 @@
 <template>
     <div>
-      home
+
     </div>
 </template>
 
@@ -9,6 +9,8 @@ export default {
   name: 'Home',
   data () {
     return {}
+  },
+  created () {
   }
 }
 </script>

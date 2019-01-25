@@ -7,9 +7,9 @@
       :default-active="defaultRoutePath"
       :collapse="isCollapse"
       :router="true"
-      :background-color="menuBackgroundColor"
-      :text-color="textColor"
-      :active-text-color="activeTextColor"
+      :background-color="sidebarStyle.menuBackgroundColor"
+      :text-color="sidebarStyle.textColor"
+      :active-text-color="sidebarStyle.activeTextColor"
     >
       <sidebar-menu v-for="(menu, index) in routers" :key="index" :item="menu" />
     </el-menu>
@@ -24,8 +24,21 @@ export default {
   name: 'Sidebar',
   data () {
     return {
-      ...this.$config.sidebarStyle,
       defaultRoutePath: this.$route.path
+    }
+  },
+  props: {
+    sidebarStyle: {
+      type: Object,
+      default: () => {
+        return {
+          sidebarBackgroundColor: '#2B2F39',
+          menuBackgroundColor: '#333742',
+          textColor: '#bfcbd9',
+          activeTextColor: '#ffffff',
+          activeBackgroundColor: '#30B898'
+        }
+      }
     }
   },
   computed: {
@@ -44,7 +57,7 @@ export default {
   },
   methods: {
     _generateMenuStyle () {
-      const { activeBackgroundColor, activeTextColor, sidebarBackgroundColor } = this.$config.sidebarStyle
+      const { activeBackgroundColor, activeTextColor, sidebarBackgroundColor } = this.sidebarStyle
       const cStyle = document.createElement('style')
       const cssText = `.sidebar-wrapper{background: ${sidebarBackgroundColor}} .sidebar-wrapper .el-menu-warpper .el-submenu__title:hover, .sidebar-wrapper .el-menu-warpper .el-menu-item:hover, .sidebar-wrapper .el-menu-warpper .el-menu-item.is-active{background-color: ${activeBackgroundColor}!important;color: ${activeTextColor}!important;}`
       cStyle.innerText = cssText

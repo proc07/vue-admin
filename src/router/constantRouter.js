@@ -2,7 +2,7 @@ export default [
   {
     path: '',
     component: () => import('@/views/layout'),
-    redirect: 'Index',
+    redirect: '/index',
     meta: {
       title: '主页',
       icon: 'el-icon-menu'

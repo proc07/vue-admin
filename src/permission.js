@@ -1,8 +1,9 @@
 import router from './router'
 import store from './store'
-import config from './config'
 import { parsePath } from './utils/util'
 import { getToken } from './utils/token'
+
+const routerOptions = router.options
 
 function extractFirstOrLastPathKey (path) {
   const segments = path.split('.')
@@ -36,7 +37,7 @@ router.beforeEach((to, from, next) => {
       next('/')
     } else {
       if (routers.length) {
-        // 检测 to route 是否允许进入（如果不需要进入到401页面，可删除下方判断，直接 next）
+        // 检测 to 是否允许进入（如果不需要进入到401页面，可删除下方判断，直接 next）
         if ((to.meta && to.meta.whiteList) || hasRoute(routers, to.path)) {
           next()
         } else {
@@ -44,13 +45,11 @@ router.beforeEach((to, from, next) => {
         }
       } else {
         store.dispatch('GetUserInfo').then(res => {
-          const selectRequestKey = config.selectRequestKey
+          const selectRequestKey = routerOptions.selectRequestKey
           const routerOrRole = parsePath(selectRequestKey)(res)
           const { firstKey, lastKey } = extractFirstOrLastPathKey(selectRequestKey)
           const userInfo = {
-            _roleId: config.routerMode === 'constant' ? routerOrRole : `admin_${Math.random()}`,
-            _dataKey: firstKey,
-            _routerOrRoleKey: lastKey
+            _roleId: routerOrRole
           }
           // commit userInfo
           for (let key in res[firstKey]) {

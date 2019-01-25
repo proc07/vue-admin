@@ -44,7 +44,8 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button-group class="el-dropdown">
+        <el-button type="primary" @click="submitForm" v-show="!hideTooltip">查询</el-button>
+        <el-button-group class="el-dropdown" v-show="hideTooltip">
           <el-button type="primary" @click="submitForm">查询</el-button>
           <el-tooltip class="item" effect="dark" content="更多查询条件" placement="top-start">
             <el-button type="primary" class="el-dropdown__caret-button" @click="toggleFold = !toggleFold">
@@ -83,6 +84,13 @@ export default {
       default: () => {
         return {}
       }
+    }
+  },
+  computed: {
+    hideTooltip () {
+      return Object.keys(this.filterOptions).some(name => {
+        return this.filterOptions[name]['high']
+      })
     }
   },
   created () {
@@ -130,6 +138,7 @@ export default {
     .el-form-item{
       margin-bottom: 10px;
       /deep/ .el-form-item__content{
+        width: 100%;
         height: 100%;
         /deep/ .el-input-group{
           height: 100%;

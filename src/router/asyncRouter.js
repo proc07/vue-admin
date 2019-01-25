@@ -49,11 +49,6 @@ export default [
         name: 'Table',
         path: '/base/table',
         component: () => import('@/views/home/table')
-      },
-      {
-        name: 'Form',
-        path: '/base/form',
-        component: () => import('@/views/home/form')
       }
     ]
   },

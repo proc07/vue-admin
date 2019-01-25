@@ -1,14 +1,15 @@
 import axios from 'axios'
+import { getToken } from '@/utils/token'
 import { Message, MessageBox } from 'element-ui'
 
 // Set config defaults when creating the instance
 const instance = axios.create({
-  baseURL: '',
+  baseURL: process.env.VUE_APP_ROUTER_BASE_API,
   timeout: 5000
 })
 
 // Alter defaults after instance has been created
-instance.defaults.headers.common['Authorization'] = 'AUTH_TOKEN'
+instance.defaults.headers.common['Authorization'] = getToken()
 
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {

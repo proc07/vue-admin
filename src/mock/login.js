@@ -45,23 +45,6 @@ const userList = {
             Title: 'Table',
             Path: '/base/table',
             Icon: 'el-icon-menu'
-          },
-          {
-            Title: 'Form',
-            Path: '/base/form',
-            Icon: 'el-icon-menu'
-          }
-        ]
-      },
-      {
-        Title: '未定义菜单',
-        Path: '/menus-4',
-        Icon: 'el-icon-menu',
-        Children: [
-          {
-            Title: 'Undefined',
-            Path: '/menus-4-1',
-            Icon: 'el-icon-menu'
           }
         ]
       }

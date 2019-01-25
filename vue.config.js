@@ -7,6 +7,7 @@ function resolve (dir) {
 
 module.exports = {
   devServer: {
+    // proxy: 'http://localhost:3000',
     port: '1314'
   },
   chainWebpack: config => {
