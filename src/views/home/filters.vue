@@ -22,14 +22,14 @@
 
       <!-- elSelectDefault -->
       <template slot="elSelectDefault" slot-scope="{ item }">
-        <span style="float: left">{{ item.id }}</span>
-        <span style="float: right; color: #8492a6; font-size: 13px">{{ item.name }}</span>
+        <span style="float: left">-{{ item.id }}</span>
+        <span style="float: right; color: #8492a6; font-size: 13px">-{{ item.name }}</span>
       </template>
     </base-filters>
   </div>
 </template>
 // 待优化点
-2. el-select 组件 options 配置问题 (目前需要 slot 才能显示，初始数据时兼容 数组和函数调用方式)
+2. el-select 组件 options 配置问题 (目前需要 slot 才能显示，初始数据时兼容 数组和函数调用方式，如何抽离js出来)
 <script>
 import { mapGetters } from 'vuex'
 
@@ -145,7 +145,7 @@ export default {
           attr: {
             'popper-class': 'elAutocomplete',
             'fetch-suggestions': (queryString, cb) => {
-              console.log('elAutocomplete: change', queryString)
+              console.log('elAutocomplete: change', queryString, querySearchData)
               cb(querySearchData)
             },
             clearable: true,

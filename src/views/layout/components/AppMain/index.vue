@@ -20,8 +20,10 @@ export default {
     flex: 1;
     padding: 16px;
     box-sizing: border-box;
+    height: 100%;
+    overflow-x: hidden;
     .main-wrapper{
-      height: 100%;
+      min-height: 100%;
       background: #ffffff;
       border-radius: 6px;
     }

@@ -43,6 +43,7 @@ export default {
     flex: 0 0 56px;
     height: 56px;
     justify-content: space-between;
+    border-bottom: 1px solid #f0f2f5;
     .left-side{
       margin-left: 20px;
       display: flex;

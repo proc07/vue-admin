@@ -16,24 +16,20 @@
             v-on="options.event"
             :class="{ 'filters-input-group__prepend': options.prepend, 'filters-input-group__append': options.append }"
             >
-            <template v-if="options.slot && options.slot.default">
-              <!-- 1: 特定(slotWhiteList)组件使用 -->
-              <template v-if="_checkedWhiteSlot(options.component)">
-                <el-option
-                  v-for="item in options['selectOptions']"
-                  :key="item[options['alias']['value']]"
-                  :label="item[options['alias']['label']]"
-                  :value="item[options['alias']['value']]">
-                  <slot :name="options.slot.default" :item="item"></slot>
-                </el-option>
-              </template>
-              <!-- 2: 只挂载除了(slotWhiteList)组件中的 default slot -->
-              <template v-else>
-                <!-- v-if template 和 slot-scope template 不能放在一层。v-if 结果 false 时，也会挂载 slot-scope -->
-                <template slot-scope="{ item }" >
-                  <slot :name="options.slot.default" :item="item"></slot>
-                </template>
-              </template>
+            <!-- 1: 特定(slotWhiteList)组件使用 -->
+            <template v-if="_checkedWhiteSlot(options.component)">
+              <el-option
+                v-for="item in options['selectOptions']"
+                :key="item[options['alias']['value']]"
+                :label="item[options['alias']['label']]"
+                :value="item[options['alias']['value']]">
+                <slot :name="options.slot.default" :item="item"></slot>
+              </el-option>
+            </template>
+            <!-- 2: 只挂载除了(slotWhiteList)组件中的 default slot -->
+            <!-- v-if template 和 slot-scope template 不能放在一层。v-if 结果 false 时，也会挂载 slot-scope -->
+            <template v-if="options.slot && options.slot.default && !_checkedWhiteSlot(options.component)" slot-scope="{ item }">
+              <slot :name="options.slot.default" :item="item"></slot>
             </template>
             <!-- 3: 只挂载非 default slot -->
             <template v-for="(slotItem, key) in filterDefaultSlot(options)" :slot="key">
