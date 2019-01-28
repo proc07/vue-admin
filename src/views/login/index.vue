@@ -50,7 +50,7 @@ export default {
               // set vuex or cookie
               this.SET_TOKEN(res.token)
               // this.$router.push({ name: 'Home' }) 这样写会有警告！
-              this.$router.push({ path: '/home' })
+              this.$router.push({ path: '/index' })
             }
           }).catch(err => {
             console.log(err)

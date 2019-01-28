@@ -24,7 +24,7 @@
                 <router-link to="/" tag="div">
                   <el-dropdown-item>首页</el-dropdown-item>
                 </router-link>
-                <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+                <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import {
   AppMain,
   Navbar,
@@ -61,10 +61,14 @@ export default {
       return this.isCollapse ? 'collapse' : ''
     }
   },
-  created () {
-  },
   methods: {
+    ...mapActions({
+      LogOut: 'LogOut'
+    }),
     logout () {
+      this['LogOut']().then(() => {
+        window.location.reload()
+      })
     }
   },
   components: {

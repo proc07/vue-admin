@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 import { getToken } from '@/utils/token'
 import { Message, MessageBox } from 'element-ui'
 
@@ -40,7 +41,9 @@ instance.interceptors.response.use(function (response) {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-
+        store.dispatch('LogOut').then(() => {
+          window.location.reload()
+        })
       }).catch(() => {
 
       })

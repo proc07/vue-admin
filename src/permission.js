@@ -29,7 +29,6 @@ function hasRoute (routers, toPath) {
 }
 
 router.beforeEach((to, from, next) => {
-  // console.log(to, from)
   if (getToken()) {
     const { routers } = store.getters
 

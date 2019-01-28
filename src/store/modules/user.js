@@ -1,5 +1,5 @@
 import apiList from '@/request'
-import { getToken, setToken } from '@/utils/token'
+import { getToken, setToken, removeToken } from '@/utils/token'
 
 const user = {
   // namespaced: true,
@@ -27,6 +27,13 @@ const user = {
         }).catch(err => {
           reject(err)
         })
+      })
+    },
+    LogOut ({ commit }) {
+      return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        resolve()
       })
     }
   }
